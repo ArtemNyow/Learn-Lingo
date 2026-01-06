@@ -1,0 +1,61 @@
+.header {
+    max-width: 1440px;
+    padding: 30px 128px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    display: flex;
+    gap: 8px;
+}
+
+.svgLogo {
+    color: var(--color-primary);
+}
+
+.nav {
+    display: flex;
+    gap: 28px;
+}
+
+.item {}
+
+.authList {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.authItem {}
+
+.logBtn {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--color-text);
+    border: none;
+    background-color: transparent;
+    display: flex;
+    gap: 8px;
+}
+
+.regBtn {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--color-bg);
+    border-radius: 12px;
+    width: 166px;
+    height: 48px;
+    background: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
