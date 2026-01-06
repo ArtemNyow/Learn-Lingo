@@ -25,15 +25,13 @@
     gap: 28px;
 }
 
-.item {}
-
 .authList {
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
-.authItem {}
+
 
 .logBtn {
     font-weight: 700;

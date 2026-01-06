@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import css from "./Header.module.css";
 import { FiLogIn } from "react-icons/fi";
+import { useThemeStore } from "../../store/themeStore";
+import { THEMES } from "../../themes/themes";
 interface IHeader {
   isAuthenticated: boolean;
 }
 
 export default function Header({ isAuthenticated }: IHeader) {
+  const variant = useThemeStore((state) => state.variant);
+  const theme = THEMES[variant];
   return (
     <header className={css.header}>
       <Link to="/" className={css.logo}>
@@ -30,7 +34,7 @@ export default function Header({ isAuthenticated }: IHeader) {
       <ul className={css.authList}>
         <li className={css.authItem}>
           <button type="button" className={css.logBtn}>
-            <FiLogIn className={css.svgLogo} />
+            <FiLogIn className={css.svgLogo} style={{ color: theme.color }} />
             Log in
           </button>
         </li>

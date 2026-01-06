@@ -1,0 +1,83 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.heroUpper {
+    display: flex;
+    gap: 24px;
+}
+
+.wrapSection {
+    background: var(--color-bg-secont);
+    border-radius: 30px;
+    padding: 98px 108px 64px 98px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.16667;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: 32px;
+}
+
+.span {
+    font-style: italic;
+    font-weight: 400;
+}
+
+.textHero {
+    font-weight: 400;
+    line-height: 1.375;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: 64px;
+}
+
+.btnHero {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.55556;
+    color: var(--color-text);
+    border-radius: 12px;
+    padding: 16px 88px;
+}
+
+.downHero {
+    border-radius: 30px;
+
+}
+
+.listHero {
+    display: flex;
+    gap: 100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+
+.firstText {
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.14286;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+}
+
+.secontText {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.02em;
+    color: var(--color-text-light);
+    width: 76px;
+}

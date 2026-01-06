@@ -1,4 +1,5 @@
 import "./App.css";
+
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./page/Home/Home";
 import Teachers from "./page/Teachers/Teachers";
