@@ -1,12 +1,9 @@
-import { useState } from "react";
-import Modal from "../../components/Modal/Modal";
 import css from "./Home.module.css";
 import { Link } from "react-router-dom";
 import { THEMES } from "../../themes/themes";
 import { useThemeStore } from "../../store/themeStore";
 import { ThemeSwitcher } from "../../components/ThemeSwitcher/ThemeSwitcher";
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const variant = useThemeStore((state) => state.variant);
   const theme = THEMES[variant];
   return (
@@ -68,10 +65,6 @@ export default function Home() {
         </div>
       </section>
       <ThemeSwitcher />
-      <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2>Привіт! Це модалка</h2>
-      </Modal>
     </>
   );
 }

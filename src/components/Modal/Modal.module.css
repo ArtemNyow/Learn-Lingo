@@ -12,16 +12,18 @@
     background-color: var(--color-bg);
     padding: var(--spacing);
     border-radius: var(--border-radius);
-    max-width: 500px;
-    width: 90%;
+    width: 565px;
+
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     position: relative;
+    padding: 64px;
+    border-radius: 30px;
 }
 
 .modalClose {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 20px;
+    right: 20px;
     background: none;
     border: none;
     font-size: 20px;

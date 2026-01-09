@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import css from "./Header.module.css";
 import { FiLogIn } from "react-icons/fi";
 import { useThemeStore } from "../../store/themeStore";
 import { THEMES } from "../../themes/themes";
+import { useModalStore } from "../../store/modalStore";
 interface IHeader {
   isAuthenticated: boolean;
 }
@@ -10,6 +11,9 @@ interface IHeader {
 export default function Header({ isAuthenticated }: IHeader) {
   const variant = useThemeStore((state) => state.variant);
   const theme = THEMES[variant];
+  const navClass = ({ isActive }: { isActive: boolean }) =>
+    isActive ? `${css.item} ${css.active}` : css.item;
+  const { openModal } = useModalStore();
   return (
     <header className={css.header}>
       <Link to="/" className={css.logo}>
@@ -19,27 +23,36 @@ export default function Header({ isAuthenticated }: IHeader) {
         LearnLingo
       </Link>
       <nav className={css.nav}>
-        <Link to="/" className={css.item}>
+        <NavLink to="/" className={navClass}>
           Home
-        </Link>
-        <Link to="/teachers" className={css.item}>
+        </NavLink>
+
+        <NavLink to="/teachers" className={navClass}>
           Teachers
-        </Link>
+        </NavLink>
         {isAuthenticated && (
-          <Link to="/favorites" className={css.item}>
+          <NavLink to="/favorites" className={navClass}>
             Favorites
-          </Link>
+          </NavLink>
         )}
       </nav>
       <ul className={css.authList}>
         <li className={css.authItem}>
-          <button type="button" className={css.logBtn}>
+          <button
+            type="button"
+            className={css.logBtn}
+            onClick={() => openModal("login")}
+          >
             <FiLogIn className={css.svgLogo} style={{ color: theme.color }} />
             Log in
           </button>
         </li>
         <li className={css.authItem}>
-          <button className={css.regBtn} type="button">
+          <button
+            className={css.regBtn}
+            type="button"
+            onClick={() => openModal("register")}
+          >
             Register
           </button>
         </li>

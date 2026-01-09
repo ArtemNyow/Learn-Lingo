@@ -1,5 +1,6 @@
 import type React from "react";
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 import css from "./Modal.module.css";
 import { AiOutlineClose } from "react-icons/ai";
 interface ModalProps {
@@ -18,7 +19,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className={css.modalBackdrop} onClick={onClose}>
       <div className={css.modalContent} onClick={(e) => e.stopPropagation()}>
         <button className={css.modalClose} onClick={onClose}>
@@ -26,6 +27,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
         </button>
         {children}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

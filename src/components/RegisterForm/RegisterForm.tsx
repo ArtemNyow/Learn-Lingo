@@ -1,0 +1,102 @@
+import { useForm } from "react-hook-form";
+import css from "./RegisterForm.module.css";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+
+interface RegistFormData {
+  name: string;
+  email: string;
+  password: string;
+}
+const loginSchema = yup
+  .object({
+    name: yup.string().min(2, "Name too short").required("Name is required"),
+    email: yup.string().email("Invalid email").required("Email is required"),
+    password: yup
+      .string()
+      .min(6, "Password must be at least 6 chars")
+      .required("Password is required"),
+  })
+  .required();
+
+export default function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<RegistFormData>({ resolver: yupResolver(loginSchema) });
+
+  const onSubmit = (data: RegistFormData) => {
+    console.log("Register:", data);
+    reset();
+  };
+  return (
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <p className={css.title}>Registration</p>
+        <p className={css.text}>
+          Thank you for your interest in our platform! In order to register, we
+          need some information. Please provide us with the following
+          information
+        </p>
+        <ul className={css.inputList}>
+          <li className={css.itemList}>
+            <input
+              className={css.inputName}
+              type="text"
+              {...register("name")}
+              placeholder="Name"
+            />
+            {errors.name && (
+              <p style={{ color: "red" }}>{errors.name.message}</p>
+            )}
+          </li>
+          <li className={css.itemList}>
+            <input
+              className={css.inputEmail}
+              type="email"
+              {...register("email")}
+              placeholder="Email"
+            />
+            {errors.email && (
+              <p style={{ color: "red" }}>{errors.email.message}</p>
+            )}
+          </li>
+          <li className={css.itemList}>
+            <div className={css.passwordWrap}>
+              <input
+                className={css.inputPassword}
+                type={showPassword ? "text" : "password"}
+                {...register("password")}
+                placeholder="Password"
+              />
+              {errors.password && (
+                <p style={{ color: "red" }}>{errors.password.message}</p>
+              )}
+              <button
+                className={css.hideBtn}
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <AiOutlineEyeInvisible size={20} />
+                ) : (
+                  <AiOutlineEye size={20} />
+                )}
+              </button>
+            </div>
+          </li>
+        </ul>
+
+        <button className={css.submitBtn} type="submit">
+          Sign Up
+        </button>
+      </form>
+    </>
+  );
+}

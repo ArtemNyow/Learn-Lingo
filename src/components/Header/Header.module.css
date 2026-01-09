@@ -16,6 +16,15 @@
     gap: 8px;
 }
 
+.item {
+    color: var(--color-text);
+    transition: color 0.3s ease;
+}
+
+.item.active {
+    color: var(--color-primary);
+}
+
 .svgLogo {
     color: var(--color-primary);
 }
@@ -30,8 +39,6 @@
     align-items: center;
     gap: 16px;
 }
-
-
 
 .logBtn {
     font-weight: 700;

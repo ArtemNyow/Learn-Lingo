@@ -1,0 +1,73 @@
+.title {
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: 20px;
+}
+
+.text {
+    font-weight: 400;
+    line-height: 1.375;
+    color: var(--color-text-light);
+    margin-bottom: 40px;
+}
+
+.inputList {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 40px;
+}
+
+
+.inputName {
+    width: 100%;
+    border: 1px solid var(--color-text-light);
+    border-radius: 12px;
+    padding: 16px 0 16px 18px;
+    margin-bottom: 8px;
+}
+
+.inputEmail {
+    width: 100%;
+    border: 1px solid var(--color-text-light);
+    border-radius: 12px;
+    padding: 16px 0 16px 18px;
+    margin-bottom: 8px;
+}
+
+
+.passwordWrap {
+    position: relative;
+}
+
+.inputPassword {
+    width: 100%;
+    border: 1px solid var(--color-text-light);
+    border-radius: 12px;
+    padding: 16px 0 16px 18px;
+    margin-bottom: 8px;
+}
+
+.hideBtn {
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    right: 8px;
+    top: 15px;
+}
+
+.submitBtn {
+    margin: 0 auto;
+    width: 100%;
+    border: none;
+    background-color: var(--color-primary);
+    border-radius: 12px;
+    padding: 16px 0;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.55556;
+    color: var(--color-text);
+}
