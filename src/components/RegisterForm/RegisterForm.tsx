@@ -4,7 +4,11 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
+import { FirebaseError } from "firebase/app";
+import toast from "react-hot-toast";
+import { useModalStore } from "../../store/modalStore";
 interface RegistFormData {
   name: string;
   email: string;
@@ -21,9 +25,9 @@ const loginSchema = yup
   })
   .required();
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const { closeModal } = useModalStore();
   const {
     register,
     handleSubmit,
@@ -31,9 +35,24 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm<RegistFormData>({ resolver: yupResolver(loginSchema) });
 
-  const onSubmit = (data: RegistFormData) => {
-    console.log("Register:", data);
-    reset();
+  const onSubmit = async (data: RegistFormData) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      await updateProfile(userCredential.user, { displayName: data.name });
+      toast.success(`Welcome, ${data.name}! Registration successful.`);
+      reset();
+      closeModal();
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        toast.error(error.message);
+      } else {
+        toast.error("An unexpected error occurred");
+      }
+    }
   };
   return (
     <>

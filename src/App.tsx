@@ -10,12 +10,14 @@ import { useModalStore } from "./store/modalStore";
 import Modal from "./components/Modal/Modal";
 import LoginForm from "./components/LoginForm/LoginForm";
 import RegisterForm from "./components/RegisterForm/RegisterForm";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const isAuthenticated = true;
   const { isOpen, contentType, closeModal } = useModalStore();
   return (
     <BrowserRouter>
+      <Toaster />
       <Header isAuthenticated={isAuthenticated} />
       <Modal isOpen={isOpen} onClose={closeModal}>
         {contentType === "login" && <LoginForm />}

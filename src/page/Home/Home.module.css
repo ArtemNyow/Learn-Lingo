@@ -38,30 +38,39 @@
 }
 
 .btnHero {
+    background-color: var(--dynamic-color, var(--color-primary));
     font-weight: 700;
     font-size: 18px;
     line-height: 1.55556;
     color: var(--color-text);
     border-radius: 12px;
     padding: 16px 88px;
+    display: inline-block;
+}
+
+.btnHero:hover,
+.btnHero:focus {
+    background-color: var(--color-primary-hover);
 }
 
 .downHero {
     border-radius: 30px;
-
+    padding: 40px 122px;
+    justify-content: center;
 }
 
 .listHero {
     display: flex;
-    gap: 100px;
+
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .item {
     display: flex;
     align-items: center;
     gap: 16px;
+    height: 36px;
 }
 
 

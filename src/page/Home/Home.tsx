@@ -25,8 +25,8 @@ export default function Home() {
             </p>
             <Link
               className={css.btnHero}
-              style={{ background: theme.color }}
-              to="/"
+              style={{ "--dynamic-color": theme.color } as React.CSSProperties}
+              to="/teachers"
             >
               Get Started
             </Link>
@@ -42,7 +42,7 @@ export default function Home() {
         </div>
         <div
           className={css.downHero}
-          style={{ border: `5px dashed  ${theme.color}` }}
+          style={{ border: `2px dashed  ${theme.color}` }}
         >
           <ul className={css.listHero}>
             <li className={css.item}>
