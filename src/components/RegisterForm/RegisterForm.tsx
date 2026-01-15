@@ -9,6 +9,7 @@ import { auth } from "../../firebase/firebase";
 import { FirebaseError } from "firebase/app";
 import toast from "react-hot-toast";
 import { useModalStore } from "../../store/modalStore";
+import { useAuthStore } from "../../store/authStore";
 interface RegistFormData {
   name: string;
   email: string;
@@ -28,6 +29,7 @@ const loginSchema = yup
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { closeModal } = useModalStore();
+  const { setUser } = useAuthStore();
   const {
     register,
     handleSubmit,
@@ -43,6 +45,7 @@ export default function RegisterForm() {
         data.password
       );
       await updateProfile(userCredential.user, { displayName: data.name });
+      setUser(userCredential.user);
       toast.success(`Welcome, ${data.name}! Registration successful.`);
       reset();
       closeModal();

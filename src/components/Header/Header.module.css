@@ -26,7 +26,8 @@
 }
 
 .svgLogo {
-    color: var(--color-primary);
+    color: var(--color-primary-hover);
+    transition: transform 0.2s ease;
 }
 
 .nav {
@@ -49,6 +50,15 @@
     background-color: transparent;
     display: flex;
     gap: 8px;
+
+}
+
+.logBtn:hover {
+    color: var(--color-primary);
+}
+
+.logBtn:hover .svgLogo {
+    transform: scale(1.2);
 }
 
 .regBtn {
@@ -63,4 +73,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
+}
+
+.regBtn:hover,
+.regBtn:focus {
+    background-color: var(--color-text-light);
 }

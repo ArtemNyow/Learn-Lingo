@@ -3,12 +3,7 @@
   --color-bg-secont: #f8f8f8;
   --color-text: #121417;
   --color-text-light: #8a8a89;
-  --color-primary: #f4c550;
-  --color-primary-hover: #fbe9ba;
-
   --font-family: 'Roboto', sans-serif;
-
-
 }
 
 body {
@@ -28,11 +23,7 @@ a {
 
 
 
-a:hover,
-a:focus {
-  color: var(--color-primary-hover);
 
-}
 
 a:visited {
   color: inherit;

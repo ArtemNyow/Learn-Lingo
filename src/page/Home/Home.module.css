@@ -57,6 +57,7 @@
     border-radius: 30px;
     padding: 40px 122px;
     justify-content: center;
+    border: 3.5px dashed var(--color-primary);
 }
 
 .listHero {

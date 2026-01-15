@@ -4,6 +4,12 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useAuthStore } from "../../store/authStore";
+import { useModalStore } from "../../store/modalStore";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
+import toast from "react-hot-toast";
+import { FirebaseError } from "firebase/app";
 
 interface LoginFormData {
   email: string;
@@ -21,6 +27,8 @@ const loginSchema = yup
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const { setUser } = useAuthStore();
+  const { closeModal } = useModalStore();
 
   const {
     register,
@@ -29,9 +37,26 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm<LoginFormData>({ resolver: yupResolver(loginSchema) });
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log("Login:", data);
-    reset();
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      toast.success(
+        `Welcome back,${userCredential.user.displayName || data.email}!`
+      );
+      setUser(userCredential.user);
+      closeModal();
+      reset();
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        toast.error(error.message);
+      } else {
+        toast.error("Unexpected error occurred");
+      }
+    }
   };
   return (
     <>

@@ -71,3 +71,8 @@
     line-height: 1.55556;
     color: var(--color-text);
 }
+
+.submitBtn:hover,
+.submitBtn:focus {
+    background-color: var(--color-primary-hover);
+}

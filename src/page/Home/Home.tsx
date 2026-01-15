@@ -13,21 +13,14 @@ export default function Home() {
           <div className={css.wrapSection}>
             <h1 className={css.title}>
               Unlock your potential with the best{" "}
-              <span className={css.span} style={{ color: theme.color }}>
-                language
-              </span>{" "}
-              tutors
+              <span className={css.span}>language</span> tutors
             </h1>
             <p className={css.textHero}>
               Embark on an Exciting Language Journey with Expert Language
               Tutors: Elevate your language proficiency to new heights by
               connecting with highly qualified and experienced tutors.
             </p>
-            <Link
-              className={css.btnHero}
-              style={{ "--dynamic-color": theme.color } as React.CSSProperties}
-              to="/teachers"
-            >
+            <Link className={css.btnHero} to="/teachers">
               Get Started
             </Link>
           </div>
@@ -40,10 +33,7 @@ export default function Home() {
             height={530}
           />
         </div>
-        <div
-          className={css.downHero}
-          style={{ border: `2px dashed  ${theme.color}` }}
-        >
+        <div className={css.downHero}>
           <ul className={css.listHero}>
             <li className={css.item}>
               <p className={css.firstText}>32,000 +</p>
