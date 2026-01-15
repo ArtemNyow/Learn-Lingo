@@ -9,6 +9,9 @@ interface ThemeState {
 }
 
 export const useThemeStore = create<ThemeState>((set) => ({
-  variant: "orange",
-  setVariant: (variant) => set({ variant }),
+  variant: (localStorage.getItem("theme") as ThemeVariant) || "orange",
+  setVariant: (variant: ThemeVariant) => {
+    localStorage.setItem("theme", variant);
+    set({ variant });
+  },
 }));

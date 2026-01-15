@@ -1,3 +1,18 @@
+import TeacherCard from "../../components/TeacherCard/TeacherCard";
+import { useTeachers } from "../../store/teachersStore";
+import css from "./Teachers.module.css";
 export default function Teachers() {
-  return <h1>Teachers Page</h1>;
+  const { teachers, loading } = useTeachers();
+  if (loading) return <p>loader</p>;
+  return (
+    <>
+      <section className={css.teacherSection}>
+        <ul className={css.list}>
+          {teachers.map((teacher) => (
+            <TeacherCard teacher={teacher} />
+          ))}
+        </ul>
+      </section>
+    </>
+  );
 }

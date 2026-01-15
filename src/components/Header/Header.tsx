@@ -33,9 +33,11 @@ export default function Header() {
         )}
       </nav>
       {isAuthenticated ? (
-        <div>
-          <p>Hi, {user?.displayName || user?.email}</p>
-          <button type="button" onClick={logout}>
+        <div className={css.isLogin}>
+          <p className={css.helloMessege}>
+            Hi, {user?.displayName || user?.email}
+          </p>
+          <button className={css.btnHello} type="button" onClick={logout}>
             Logout
           </button>
         </div>

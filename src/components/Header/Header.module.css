@@ -80,3 +80,35 @@
 .regBtn:focus {
     background-color: var(--color-text-light);
 }
+
+.isLogin {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    justify-content: end;
+}
+
+.helloMessege {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+}
+
+.btnHello {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    border: none;
+    background-color: var(--color-primary);
+    border-radius: 12px;
+    padding: 10px 20px;
+}
+
+.btnHello:hover,
+.btnHello:focus {
+    background-color: var(--color-primary-hover);
+}

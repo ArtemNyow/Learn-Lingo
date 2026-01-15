@@ -11,26 +11,30 @@ import Modal from "./components/Modal/Modal";
 import LoginForm from "./components/LoginForm/LoginForm";
 import RegisterForm from "./components/RegisterForm/RegisterForm";
 import { Toaster } from "react-hot-toast";
+import { useAuthStore } from "./store/authStore";
+import AuthMiddleware from "./components/AuthMiddleware/AuthMiddleware";
 
 function App() {
-  const isAuthenticated = true;
+  const { isAuthenticated } = useAuthStore();
   const { isOpen, contentType, closeModal } = useModalStore();
   return (
     <BrowserRouter>
       <Toaster />
-      <Header isAuthenticated={isAuthenticated} />
-      <Modal isOpen={isOpen} onClose={closeModal}>
-        {contentType === "login" && <LoginForm />}
-        {contentType === "register" && <RegisterForm />}
-      </Modal>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/teachers" element={<Teachers />} />
-        <Route
-          path="/favorites"
-          element={isAuthenticated ? <Favorites /> : <Navigate to="/" />}
-        />
-      </Routes>
+      <AuthMiddleware>
+        <Header />
+        <Modal isOpen={isOpen} onClose={closeModal}>
+          {contentType === "login" && <LoginForm />}
+          {contentType === "register" && <RegisterForm />}
+        </Modal>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/teachers" element={<Teachers />} />
+          <Route
+            path="/favorites"
+            element={isAuthenticated ? <Favorites /> : <Navigate to="/" />}
+          />
+        </Routes>
+      </AuthMiddleware>
     </BrowserRouter>
   );
 }
