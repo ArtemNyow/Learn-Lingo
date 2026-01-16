@@ -27,6 +27,7 @@
 .span {
     font-style: italic;
     font-weight: 400;
+    background-color: var(--color-primary-hover);
 }
 
 .textHero {

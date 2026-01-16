@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import type { User } from "firebase/auth";
-
+import { auth } from "../firebase/firebase";
+import { signOut } from "firebase/auth";
 interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
@@ -12,5 +13,8 @@ export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   isAuthenticated: false,
   setUser: (user) => set({ user: user, isAuthenticated: !!user }),
-  logout: () => set({ user: null, isAuthenticated: false }),
+  logout: async () => {
+    await signOut(auth);
+    set({ user: null, isAuthenticated: false });
+  },
 }));
