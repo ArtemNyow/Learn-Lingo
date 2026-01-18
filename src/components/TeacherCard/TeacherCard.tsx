@@ -1,16 +1,29 @@
 import { IoBookOutline } from "react-icons/io5";
 import type { Teacher } from "../../type/teacher";
 import css from "./TeacherCard.module.css";
-import { FaStar } from "react-icons/fa";
+import { FaHeart, FaStar } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { useState } from "react";
+import { useFavoritesStore } from "../../store/useFavoritesStore";
+import { useAuthStore } from "../../store/authStore";
+import { useModalStore } from "../../store/modalStore";
 interface ITeacherCard {
   teacher: Teacher;
 }
 export default function TeacherCard({ teacher }: ITeacherCard) {
-  const [liked, setLiked] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
+  const { isAuthenticated } = useAuthStore();
+  const { openModal } = useModalStore();
+  const { toggleFavorite, isFavorite } = useFavoritesStore();
+  const isLiked = isFavorite(teacher.id || "");
+  const handleHeardClick = () => {
+    if (!isAuthenticated) {
+      openModal("login");
+      return;
+    }
+    toggleFavorite(teacher);
+  };
   return (
     <>
       <li key={teacher.id} className={css.item}>
@@ -46,16 +59,21 @@ export default function TeacherCard({ teacher }: ITeacherCard) {
             <button
               type="button"
               className={css.heart}
-              onClick={() => setLiked((prev) => !prev)}
+              onClick={handleHeardClick}
             >
-              <CiHeart
-                size={26}
-                color={liked ? "#FF0000" : "#000"}
-                style={{
-                  transition: "color 0.3s, transform 0.2s",
-                  transform: liked ? "scale(1.2)" : "scale(1)",
-                }}
-              />
+              {isLiked ? (
+                <FaHeart
+                  size={26}
+                  color="var(--color-primary)"
+                  className={css.heartIcon}
+                />
+              ) : (
+                <CiHeart
+                  size={26}
+                  color="var(--color-text)"
+                  className={css.heartIcon}
+                />
+              )}
             </button>
           </div>
           <h3 className={css.name}>
@@ -80,15 +98,17 @@ export default function TeacherCard({ teacher }: ITeacherCard) {
           {!showMore && (
             <button
               type="button"
-              className={`${css.btnReadMore} ${css.underline}`}
+              className={css.btnReadMore}
               onClick={() => setShowMore(true)}
             >
               Read more
             </button>
           )}
+
           {showMore && (
             <div className={css.extraList}>
               <p className={css.extraItem}>{teacher.experience}</p>
+
               <ul className={css.reviews}>
                 {teacher.reviews.map((review, index) => (
                   <li key={index} className={css.reviewItem}>
@@ -103,6 +123,7 @@ export default function TeacherCard({ teacher }: ITeacherCard) {
                   </li>
                 ))}
               </ul>
+
               <ul className={css.levelList}>
                 {teacher.levels.map((level, index) => (
                   <li className={css.levelItem} key={index}>
@@ -110,6 +131,7 @@ export default function TeacherCard({ teacher }: ITeacherCard) {
                   </li>
                 ))}
               </ul>
+
               <button className={css.btnTrial} type="button">
                 Book trial lesson
               </button>
