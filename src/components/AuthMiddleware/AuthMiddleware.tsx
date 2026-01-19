@@ -1,30 +1,46 @@
 import { useEffect, useState } from "react";
 import { useAuthStore } from "../../store/authStore";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
+import { auth, db } from "../../firebase/firebase";
+import { ref, onValue } from "firebase/database";
+import { useFavoritesStore } from "../../store/useFavoritesStore";
 import Loader from "../Loader/Loader";
+import type { Teacher } from "../../type/teacher";
 
-interface Props {
+export default function AuthMiddleware({
+  children,
+}: {
   children: React.ReactNode;
-}
-
-export default function AuthMiddleware({ children }: Props) {
+}) {
   const { setUser } = useAuthStore();
+  const { setFavorites, clearFavorites } = useFavoritesStore();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+
+        const favoritesRef = ref(db, `users/${user.uid}/favorites`);
+        onValue(favoritesRef, (snapshot) => {
+          const data = snapshot.val();
+          if (data) {
+            const favoritesArray = Object.values(data) as Teacher[];
+            setFavorites(favoritesArray);
+          } else {
+            setFavorites([]);
+          }
+        });
       } else {
         setUser(null);
+        clearFavorites();
       }
       setLoading(false);
     });
+
     return () => unsubscribe();
-  }, [setUser]);
-  if (loading) {
-    return <Loader />;
-  }
+  }, [setUser, setFavorites, clearFavorites]);
+
+  if (loading) return <Loader />;
   return <>{children}</>;
 }

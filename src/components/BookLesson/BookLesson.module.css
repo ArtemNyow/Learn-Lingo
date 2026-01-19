@@ -1,0 +1,161 @@
+.title {
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: 20px;
+}
+
+.text {
+    font-weight: 400;
+    line-height: 1.375;
+    color: var(--color-text-light);
+    margin-bottom: 20px;
+}
+
+.inputList {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 40px;
+
+}
+
+
+
+.inputEmail {
+    width: 100%;
+    border: 1px solid var(--color-text-light);
+
+    border-radius: 12px;
+    padding: 16px 0 16px 18px;
+
+
+}
+
+
+.passwordWrap {
+    position: relative;
+}
+
+.inputPassword {
+
+    width: 100%;
+    border: 1px solid var(--color-text-light);
+
+    border-radius: 12px;
+    padding: 16px 0 16px 18px;
+
+}
+
+.hideBtn {
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    right: 8px;
+    top: 15px;
+
+}
+
+.submitBtn {
+    margin: 0 auto;
+    width: 100%;
+    border: none;
+    background-color: var(--color-primary);
+    border-radius: 12px;
+    padding: 16px 0;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.55556;
+    color: var(--color-text);
+}
+
+.submitBtn:hover,
+.submitBtn:focus {
+    background-color: var(--color-primary-hover);
+}
+
+.img {
+    width: 44px;
+    height: 44px;
+    border-radius: 100px;
+}
+
+.textLight {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33333;
+    color: var(--color-text-light);
+}
+
+.name {
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+.teacherWrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 40px;
+}
+
+.nameWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+}
+
+.radioTitle {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.33333;
+    color: var(--color-text);
+
+}
+
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.radioLabel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.radioLabel input {
+    display: none;
+}
+
+.customRadio {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    position: relative;
+}
+
+.radioLabel input:checked+.customRadio {
+    border-color: var(--color-primary);
+}
+
+.radioLabel input:checked+.customRadio::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

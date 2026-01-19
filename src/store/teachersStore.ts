@@ -1,87 +1,50 @@
-import {
-  ref,
-  query,
-  orderByKey,
-  startAfter,
-  limitToFirst,
-  get,
-  DataSnapshot,
-} from "firebase/database";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { ref, get, query, orderByKey } from "firebase/database";
+import { useState, useEffect } from "react";
 import type { Teacher } from "../type/teacher";
 import { db } from "../firebase/firebase";
 
-const PAGE_SIZE = 4;
+// Тип даних, який приходить з Firebase (без ID, бо ID — це ключ об'єкта)
+type FirebaseTeachersResponse = Record<string, Omit<Teacher, "id">>;
 
 export function useTeachers() {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [lastKey, setLastKey] = useState<string | null>(null);
-  const [hasMore, setHasMore] = useState(true);
-
-  // Використовуємо Ref, щоб гарантувати, що ми не запустимо завантаження двічі одночасно
-  const isFetching = useRef(false);
-
-  const loadTeachers = useCallback(async () => {
-    // Якщо вже вантажиться або даних більше немає — виходимо
-    if (isFetching.current || !hasMore) return;
-
-    isFetching.current = true;
-    setLoading(true);
-
-    try {
-      let teachersQuery = query(
-        ref(db, "teachers"),
-        orderByKey(),
-        limitToFirst(PAGE_SIZE),
-      );
-
-      if (lastKey) {
-        teachersQuery = query(
-          ref(db, "teachers"),
-          orderByKey(),
-          startAfter(lastKey),
-          limitToFirst(PAGE_SIZE),
-        );
-      }
-
-      const snapshot: DataSnapshot = await get(teachersQuery);
-      const data = snapshot.val() as Record<string, Omit<Teacher, "id">> | null;
-
-      if (data) {
-        const teachersArray: Teacher[] = Object.entries(data).map(
-          ([id, value]) => ({
-            id,
-            ...value,
-          }),
-        );
-
-        setTeachers((prev) => {
-          const newItems = teachersArray.filter(
-            (item) => !prev.some((p) => p.id === item.id),
-          );
-          return [...prev, ...newItems];
-        });
-
-        const keys = Object.keys(data);
-        const lastSnapshotKey = keys[keys.length - 1];
-        setLastKey(lastSnapshotKey);
-
-        if (keys.length < PAGE_SIZE) setHasMore(false);
-      } else {
-        setHasMore(false);
-      }
-    } catch (error) {
-      console.error("Firebase Error:", error);
-    } finally {
-      setLoading(false);
-      isFetching.current = false;
-    }
-  }, [lastKey, hasMore]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    loadTeachers();
+    const fetchTeachers = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const teachersRef = ref(db, "teachers");
+        const teachersQuery = query(teachersRef, orderByKey());
+        const snapshot = await get(teachersQuery);
+
+        if (snapshot.exists()) {
+          const data = snapshot.val() as FirebaseTeachersResponse;
+
+          // Трансформація об'єкта в масив з додаванням ID
+          const teachersArray: Teacher[] = Object.entries(data).map(
+            ([id, teacherData]) => ({
+              id,
+              ...teacherData,
+            }),
+          );
+
+          setTeachers(teachersArray);
+        } else {
+          setTeachers([]);
+        }
+      } catch (err) {
+        console.error("Failed to fetch teachers:", err);
+        setError("Failed to load teachers. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTeachers();
   }, []);
 
-  return { teachers, loading, hasMore, loadTeachers };
+  return { teachers, loading, error };
 }

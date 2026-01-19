@@ -1,17 +1,21 @@
 import { create } from "zustand";
+import type { Teacher } from "../type/teacher";
 
-type ModalContent = "login" | "register" | null;
+type ModalType = "login" | "register" | "book" | null;
 
 interface ModalState {
   isOpen: boolean;
-  contentType: ModalContent;
-  openModal: (type: ModalContent) => void;
+  contentType: ModalType;
+  payload: Teacher | null;
+  openModal: (type: ModalType, payload?: Teacher | null) => void;
   closeModal: () => void;
 }
 
 export const useModalStore = create<ModalState>((set) => ({
   isOpen: false,
   contentType: null,
-  openModal: (type) => set({ isOpen: true, contentType: type }),
-  closeModal: () => set({ isOpen: false }),
+  payload: null,
+  openModal: (type, payload = null) =>
+    set({ isOpen: true, contentType: type, payload }),
+  closeModal: () => set({ isOpen: false, contentType: null, payload: null }),
 }));

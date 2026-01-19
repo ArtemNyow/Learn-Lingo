@@ -13,10 +13,12 @@ import RegisterForm from "./components/RegisterForm/RegisterForm";
 import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore";
 import AuthMiddleware from "./components/AuthMiddleware/AuthMiddleware";
+import BookLesson from "./components/BookLesson/BookLesson";
 
 function App() {
   const { isAuthenticated } = useAuthStore();
-  const { isOpen, contentType, closeModal } = useModalStore();
+  const { isOpen, contentType, closeModal, payload } = useModalStore();
+
   return (
     <BrowserRouter>
       <Toaster />
@@ -25,6 +27,9 @@ function App() {
         <Modal isOpen={isOpen} onClose={closeModal}>
           {contentType === "login" && <LoginForm />}
           {contentType === "register" && <RegisterForm />}
+          {contentType === "book" && payload && (
+            <BookLesson teacher={payload} />
+          )}
         </Modal>
         <Routes>
           <Route path="/" element={<Home />} />

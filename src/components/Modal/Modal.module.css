@@ -4,20 +4,26 @@
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding: 16px;
     z-index: 1000;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.modalBackdrop::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }
 
 .modalContent {
     background-color: var(--color-bg);
-    padding: var(--spacing);
-    border-radius: var(--border-radius);
     width: 565px;
-
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    position: relative;
-    padding: 64px;
+    max-width: 100%;
     border-radius: 30px;
+    padding: 64px;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .modalClose {

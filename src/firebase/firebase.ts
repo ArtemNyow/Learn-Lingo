@@ -1,18 +1,20 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDRbyVxrBTU8PiDkEDwlg3Z0ebJwxJnja8",
-  authDomain: "learn-lingo-f4a86.firebaseapp.com",
-  databaseURL: "https://learn-lingo-f4a86-default-rtdb.firebaseio.com",
-  projectId: "learn-lingo-f4a86",
-  storageBucket: "learn-lingo-f4a86.firebasestorage.app",
-  messagingSenderId: "1087736176292",
-  appId: "1:1087736176292:web:9a9c012ce358b16847d031",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export const db = getDatabase(app);
+export const dbStore = getFirestore(app);
