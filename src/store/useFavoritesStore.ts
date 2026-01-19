@@ -3,10 +3,10 @@ import type { Teacher } from "../type/teacher";
 
 interface FavoritesState {
   favorites: Teacher[];
-  setFavorites: (favorites: Teacher[]) => void; // Додаємо для завантаження з Firebase
+  setFavorites: (favorites: Teacher[]) => void;
   toggleFavorite: (teacher: Teacher) => void;
   isFavorite: (teacherId: string) => boolean;
-  clearFavorites: () => void; // Для очищення при логауті
+  clearFavorites: () => void;
 }
 
 export const useFavoritesStore = create<FavoritesState>()((set, get) => ({

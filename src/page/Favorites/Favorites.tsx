@@ -1,7 +1,7 @@
 import TeacherCard from "../../components/TeacherCard/TeacherCard";
 import css from "./Favorites.module.css";
 import { useFavoritesStore } from "../../store/useFavoritesStore";
-import { useAuthStore } from "../../store/authStore"; // Додаємо перевірку авторизації
+import { useAuthStore } from "../../store/authStore";
 
 export default function Favorites() {
   const { favorites } = useFavoritesStore();

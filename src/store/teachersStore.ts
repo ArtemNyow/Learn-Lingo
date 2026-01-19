@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import type { Teacher } from "../type/teacher";
 import { db } from "../firebase/firebase";
 
-// Тип даних, який приходить з Firebase (без ID, бо ID — це ключ об'єкта)
 type FirebaseTeachersResponse = Record<string, Omit<Teacher, "id">>;
 
 export function useTeachers() {
@@ -23,7 +22,6 @@ export function useTeachers() {
         if (snapshot.exists()) {
           const data = snapshot.val() as FirebaseTeachersResponse;
 
-          // Трансформація об'єкта в масив з додаванням ID
           const teachersArray: Teacher[] = Object.entries(data).map(
             ([id, teacherData]) => ({
               id,
