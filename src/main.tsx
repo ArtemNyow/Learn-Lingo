@@ -10,7 +10,7 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
       <App />
-      <ThemeSwitcher variant="side" />
+      <ThemeSwitcher />
     </ThemeProvider>
   </StrictMode>,
 );
