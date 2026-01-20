@@ -1,73 +1,142 @@
-# React + TypeScript + Vite
+# Learn Lingo 🇬🇧🌍
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Learn Lingo** is a web application for a company that provides online foreign language tutoring services.  
+The project allows users to browse a list of teachers, filter them by various criteria, add them to favorites, and interact with the service after authentication.
 
-Currently, two official plugins are available:
+The application is implemented according to the technical requirements and design mockup, using a modern React-based technology stack.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🔗 Main Pages
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🏠 Home
+- Information about the company’s advantages
+- Call to action to start using the service
+- Navigation to the Teachers page
 
-## Expanding the ESLint configuration
+### 👩‍🏫 Teachers
+- List of teachers (pagination — 4 cards per load)
+- Filtering by:
+  - teaching language
+  - students’ knowledge level
+  - price per hour
+- Detailed teacher card (Read more)
+- Adding teachers to favorites
+- Booking a trial lesson via a modal window
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### ❤️ Favorites (private page)
+- Available only to authenticated users
+- Contains a list of teachers added to favorites
+- Styling is consistent with the Teachers page
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🔐 Authentication & Firebase Integration
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- User registration, login, and logout implemented
+- Fetching and storing current user data
+- **Firebase Authentication** is used
+- User data (favorites) is stored in **Firestore** and linked to `user.uid`
+- User state is synchronized using `onAuthStateChanged`
+
+---
+
+## 🧩 Project Structure
+
+```text
+src/
+│
+├── components/        # Повторно використовувані UI-компоненти
+│   ├── Header/
+│   ├── TeacherCard/
+│   ├── Modal/
+│   ├── Loader/
+│   └── Forms/
+│
+├── pages/             # Сторінки застосунку
+│   ├── Home/
+│   ├── Teachers/
+│   └── Favorites/
+│
+├── store/             # Zustand стори
+│   ├── authStore.ts
+│   ├── useFavoritesStore.ts
+│   ├── teachersStore.ts
+│   └── modalStore.ts
+│
+├── firebase/          # Налаштування Firebase
+│   └── firebase.ts
+│
+├── type/              # TypeScript типи
+│   └── teacher.ts
+│
+├── hooks/             # Кастомні хуки
+│
+├── styles/            # Глобальні стилі
+│
+├── App.tsx            # Головний компонент
+├── main.tsx           # Точка входу
+└── router.tsx         # Маршрутизація
 ```
+## Technologies and Libraries
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Frontend
+- React 19
+- TypeScript
+- Vite
+- React Router DOM v7
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### State Management
+- Zustand  
+  - auth store  
+  - favorites store  
+  - teachers store  
+  - modal store  
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Backend / Database
+- Firebase Authentication
+- Firebase Firestore
+- Firebase Realtime Database
+
+### Forms and Validation
+- react-hook-form
+- yup
+- @hookform/resolvers
+
+### UI / UX
+- react-icons
+- react-select
+- react-hot-toast
+- normalize.css
+
+### Tools
+- ESLint
+- Prettier
+- TypeScript ESLint
+- GitHub Pages / Netlify
+
+## Features
+- User authentication
+- Private routes
+- Add / remove teachers from favorites
+- Persisted state after page reload
+- Teachers filtering
+- Pagination (Load more)
+- Modal windows with closing via:
+  - close button
+  - backdrop click
+  - Esc key
+
+## Layout and Requirements
+- Semantic and valid markup
+- No console errors
+- Full interactivity
+- User actions persistence
+
+## Deployment
+- The project is deployed and available online  
+- Deployment link is available in the repository profile
+
+## Author
+ArtemNyow(Artem Lykhatskyi)
+Educational project built with React and Firebase
