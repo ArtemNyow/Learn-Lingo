@@ -1,4 +1,4 @@
-# Learn Lingo 🇬🇧🌍
+# Learn Lingo🌍
 
 **Learn Lingo** is a web application for a company that provides online foreign language tutoring services.  
 The project allows users to browse a list of teachers, filter them by various criteria, add them to favorites, and interact with the service after authentication.
