@@ -133,6 +133,19 @@ src/
 - Full interactivity
 - User actions persistence
 
+## 🎨 Design & Requirements
+
+- Developed according to the provided **Figma design** and **technical specification**
+- Semantic and valid markup
+- No console errors
+- Fully interactive UI
+- User actions are persisted across sessions
+
+**Figma Design:** [View Mockup](https://www.figma.com/file/dewf5jVviSTuWMMyU3d8Mc/%D0%9F%D0%B5%D1%82-%D0%BF%D1%80%D0%BE%D1%94%D0%BA%D1%82-%D0%B4%D0%BB%D1%8F-%D0%9A%D0%A6?type=design&node-id=0-1&mode=design&t=jCmjSs9PeOjObYSc-0)  
+
+**Technical Specification:** [View TЗ Document](https://docs.google.com/document/d/1ZB_MFgnnJj7t7OXtv5hESSwY6xRgVoACZKzgZczWc3Y/edit?tab=t.0)
+
+
 ## Deployment
 - The project is deployed and available online  
 - Deployment link is available in the repository profile
