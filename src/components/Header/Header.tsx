@@ -1,7 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import css from "./Header.module.css";
 import { FiLogIn } from "react-icons/fi";
-
 import { useModalStore } from "../../store/modalStore";
 import { useAuthStore } from "../../store/authStore";
 

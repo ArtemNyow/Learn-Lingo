@@ -2,7 +2,6 @@ import css from "./Home.module.css";
 import { Link } from "react-router-dom";
 import { THEMES } from "../../themes/themes";
 import { useThemeStore } from "../../store/themeStore";
-import { ThemeSwitcher } from "../../components/ThemeSwitcher/ThemeSwitcher";
 export default function Home() {
   const variant = useThemeStore((state) => state.variant);
   const theme = THEMES[variant];
@@ -54,7 +53,6 @@ export default function Home() {
           </ul>
         </div>
       </section>
-      <ThemeSwitcher />
     </>
   );
 }

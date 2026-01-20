@@ -1,0 +1,69 @@
+.container {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.trigger {
+    width: 14px;
+    height: 50px;
+    border-radius: 0px 10px 10px 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.trigger:hover {
+    width: 24px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px 8px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px 0 0 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-right: none;
+
+    max-height: 0;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.menuOpen {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.colorBtn {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.colorBtn:hover {
+    transform: scale(1.15);
+}
+
+.active {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
