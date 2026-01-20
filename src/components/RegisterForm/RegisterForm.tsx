@@ -34,7 +34,7 @@ export default function RegisterForm() {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<RegistFormData>({ resolver: yupResolver(loginSchema) });
 
   const onSubmit = async (data: RegistFormData) => {
@@ -42,7 +42,7 @@ export default function RegisterForm() {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         data.email,
-        data.password
+        data.password,
       );
       await updateProfile(userCredential.user, { displayName: data.name });
       setUser(userCredential.user);
@@ -115,8 +115,8 @@ export default function RegisterForm() {
           </li>
         </ul>
 
-        <button className={css.submitBtn} type="submit">
-          Sign Up
+        <button className={css.submitBtn} type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Registering..." : "Register"}
         </button>
       </form>
     </>

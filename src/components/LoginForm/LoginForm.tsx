@@ -34,7 +34,7 @@ export default function LoginForm() {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<LoginFormData>({ resolver: yupResolver(loginSchema) });
 
   const onSubmit = async (data: LoginFormData) => {
@@ -42,10 +42,10 @@ export default function LoginForm() {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         data.email,
-        data.password
+        data.password,
       );
       toast.success(
-        `Welcome back,${userCredential.user.displayName || data.email}!`
+        `Welcome back,${userCredential.user.displayName || data.email}!`,
       );
       setUser(userCredential.user);
       closeModal();
@@ -104,8 +104,8 @@ export default function LoginForm() {
           </li>
         </ul>
 
-        <button className={css.submitBtn} type="submit">
-          Log In
+        <button className={css.submitBtn} type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Logging in..." : "Log In"}
         </button>
       </form>
     </>
