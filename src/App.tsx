@@ -14,6 +14,7 @@ import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore";
 import AuthMiddleware from "./components/AuthMiddleware/AuthMiddleware";
 import BookLesson from "./components/BookLesson/BookLesson";
+import NotFound from "./page/NotFound/NotFound";
 
 function App() {
   const { isAuthenticated } = useAuthStore();
@@ -38,6 +39,7 @@ function App() {
             path="/favorites"
             element={isAuthenticated ? <Favorites /> : <Navigate to="/" />}
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthMiddleware>
     </BrowserRouter>
